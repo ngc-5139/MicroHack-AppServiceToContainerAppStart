@@ -1,11 +1,11 @@
-name: Build and Deploy to Container Service
+name: Build and Deploy to Container App
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build and Test Solution
+    name: Build Solution
     runs-on: ubuntu-latest
 
     steps:
@@ -16,6 +16,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
 
       - name: Build with dotnet
         run: dotnet build --no-restore
